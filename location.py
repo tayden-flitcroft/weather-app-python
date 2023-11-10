@@ -26,9 +26,10 @@ class Location:
 
             # validate successful response contains results
             if 'results' in json:
-                if [result for result in json['results'] if result['admin1'].lower() == self.state.lower()]:
+                # print(json['results'])
+                if [result for result in json['results'] if 'admin1' in result and result['admin1'].lower() == self.state.lower()]:
                     # Destructure city_data by filtering the response to locate the object that matches the state name just in case there are mulitple of the same city across the country
-                    city_data = [result for result in json['results'] if result['admin1'].lower() == self.state.lower()][0]
+                    city_data = [result for result in json['results'] if 'admin1' in result and result['admin1'].lower() == self.state.lower()][0]
 
                     # Redefine variables to syncronize with API values
                     self.state = city_data['admin1']
